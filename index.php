@@ -5,10 +5,10 @@
 </form>
 
 <?php
-include '/lib/simple_html_dom.php';
-include '/lib/http_build_url.inc';
-require '/lib/vendor/autoload.php';
-require '/lib/URL2.php';
+include '/var/www/html/linktraveler/lib/simple_html_dom.php';
+include '/var/www/html/linktraveler/lib/http_build_url.inc';
+require '/var/www/html/linktraveler/lib/vendor/autoload.php';
+require '/var/www/html/linktraveler/lib/URL2.php';
 use GuzzleHttp\Client;
 
 $client = new Client();
@@ -236,7 +236,7 @@ if( isset( $_POST['Submit'] ) ) // Начало скрипта
 		ob_start();
 		
 		$myFile = $_POST['file'];	// Получаем URL и HOSTNAME сайта
-		$f = fopen("database/new/".$myFile, "r");
+		$f = fopen("/var/www/html/linktraveler/database/new/".$myFile, "r");
 		while(!feof($f)) 
 		{ 
 			$line = fgets($f);
@@ -248,15 +248,15 @@ if( isset( $_POST['Submit'] ) ) // Начало скрипта
 		fclose($f);
 		
 		$date = date("Y-m-d_H-i-s");
-		$newLinks_file = "database/new/newLinks_".$date.".txt";
+		$newLinks_file = "/var/www/html/linktraveler/database/new/newLinks_".$date.".txt";
 		$fp = fopen($newLinks_file, "w");
 		fclose($fp);
 		
-		$emails_file = "database/emails/emails_".$date.".txt";
+		$emails_file = "/var/www/html/linktraveler/database/emails/emails_".$date.".txt";
 		$fp = fopen($emails_file, "w");
 		fclose($fp);
 		
-		$f = fopen("database/old/oldLinks.txt", "r");
+		$f = fopen("/var/www/html/linktraveler/database/old/oldLinks.txt", "r");
 		while(!feof($f)) 
 		{ 
 			$line = fgets($f);
@@ -265,7 +265,7 @@ if( isset( $_POST['Submit'] ) ) // Начало скрипта
 		}
 		fclose($f);
 		
-		$result = "database/result/result_".$date.".html";
+		$result = "/var/www/html/linktraveler/database/result/result_".$date.".html";
 		$fp = fopen($result, "w");
 		fclose($fp);
 		
@@ -355,7 +355,7 @@ if( isset( $_POST['Submit'] ) ) // Начало скрипта
 		}
 		
 		foreach ($new_used_links as $u_link)
-			file_put_contents("database/old/oldLinks.txt", PHP_EOL.$u_link, FILE_APPEND);
+			file_put_contents("/var/www/html/linktraveler/database/old/oldLinks.txt", PHP_EOL.$u_link, FILE_APPEND);
 		$time = microtime(true) - $start; // Выключение таймера
 		printf('<br>Script was in process for %.4F sec.', $time);
 		$content = ob_get_contents();
