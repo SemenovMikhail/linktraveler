@@ -221,6 +221,7 @@ function LinkProceed ($f_url)
 
 if( isset( $_POST['Submit'] ) ) // Начало скрипта
     {				
+    	echo "123";
 		error_reporting(E_ALL ^ E_NOTICE);	
 		set_time_limit(0);	// Чтобы скрипт не зависал через 30 секунд
 		$start = microtime(true); // Включение таймера для скрипта
