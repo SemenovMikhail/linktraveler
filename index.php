@@ -42,7 +42,9 @@ function check_url_for_errors ($url)
 		return true;
 	}
 	else
+	{
 		return false;
+	}
 }
 
 function normalizePath($path)
@@ -146,7 +148,7 @@ function LinkProceed ($f_url)
 	
 	echo "<font style=\"background-color: Yellow\">URL : $f_url</font><br>";
 	
-	if (!check_extension($parse[path], $correct_extensions))
+	if (!check_extension($parse[$path], $correct_extensions))
 		return 0;
 	
 	$replace = str_replace (' ','%20',$f_url);
@@ -156,6 +158,10 @@ function LinkProceed ($f_url)
 		
 	$hostname = $parse[host];	
 	$data = @file_get_html($replace);
+
+	//$titles = find_inner_text($data, "title");
+	//foreach ($titles as $title)
+	//	echo "<br>TITLE IS: ".$title."<br>";
 	
 	$find_elements = find_all_elements($data, "href", "*");
 	
@@ -215,7 +221,7 @@ function LinkProceed ($f_url)
 
 if( isset( $_POST['Submit'] ) ) // Начало скрипта
     {				
-		
+		error_reporting(E_ALL ^ E_NOTICE);	
 		set_time_limit(0);	// Чтобы скрипт не зависал через 30 секунд
 		$start = microtime(true); // Включение таймера для скрипта
 		$external_links = array();	// Init
@@ -233,7 +239,7 @@ if( isset( $_POST['Submit'] ) ) // Начало скрипта
 		$internal_links_limit = 150;
 		$time_limit = 15;
 		
-		ob_start();
+		//ob_start();
 		
 		$myFile = $_POST['file'];	// Получаем URL и HOSTNAME сайта
 		$f = fopen("/var/www/html/linktraveler/database/new/".$myFile, "r");
@@ -247,6 +253,7 @@ if( isset( $_POST['Submit'] ) ) // Начало скрипта
 		}
 		fclose($f);
 		
+		date_default_timezone_set('UTC');
 		$date = date("Y-m-d_H-i-s");
 		$newLinks_file = "/var/www/html/linktraveler/database/new/newLinks_".$date.".txt";
 		$fp = fopen($newLinks_file, "w");
@@ -345,10 +352,11 @@ if( isset( $_POST['Submit'] ) ) // Начало скрипта
 				{
 					file_put_contents($newLinks_file, PHP_EOL.$link, FILE_APPEND);
 					$ip = gethostbyname($ext_parse[host]);
-					$country_url = "http://ipgeobase.ru/?address=".$ip."&search=%C8%F1%EA%E0%F2%FC";
-					$country_data = @file_get_html($country_url);
-					$country_array = find_inner_text($country_data, 'b');
-					$country = $country_array[0];
+					$country = "not ready";
+					//$country_url = "http://ipgeobase.ru/?address=".$ip."&search=%C8%F1%EA%E0%F2%FC";
+					//$country_data = @file_get_html($country_url);
+					//$country_array = find_inner_text($country_data, 'b');
+					//$country = $country_array[0];
 					echo "$link is <font style=\"background-color: Green\">valid</font> country: $country<br>";
 				}				
 			}
@@ -358,9 +366,9 @@ if( isset( $_POST['Submit'] ) ) // Начало скрипта
 			file_put_contents("/var/www/html/linktraveler/database/old/oldLinks.txt", PHP_EOL.$u_link, FILE_APPEND);
 		$time = microtime(true) - $start; // Выключение таймера
 		printf('<br>Script was in process for %.4F sec.', $time);
-		$content = ob_get_contents();
-		$f = fopen($result, "w");
-		fwrite($f, $content);
-		fclose($f); 
+		//$content = ob_get_contents();
+		//$f = fopen($result, "w");
+		//fwrite($f, $content);
+		//fclose($f); 
     }
 ?>
