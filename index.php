@@ -5,10 +5,11 @@
 </form>
 
 <?php
+set_time_limit(0);
 if( isset( $_POST['Submit'] ) ) // Начало скрипта
     {				
-		$url = $_POST['inputUrl'];
-		exec('php /var/www/html/linktraveler/scripts/linktraveler.php '.$url);	
-		echo "Скрипт завершил свою работую";
+	$url = $_POST['inputUrl'];
+	exec('php /var/www/html/linktraveler/scripts/linktraveler.php '.$url);	
+	echo "Скрипт завершил свою работую";
     }
 ?>

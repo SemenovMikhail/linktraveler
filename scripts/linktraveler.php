@@ -148,6 +148,8 @@ function LinkProceed ($f_url)
 	
 	$replace = str_replace (' ','%20',$f_url);
 	
+	echo "<br>".$replace."<br>";
+
 	if(check_url_for_errors($replace))
 		return 0;
 		
@@ -240,7 +242,7 @@ while(!feof($f))
 	$line = fgets($f);
 	if ($line !== PHP_EOL)
 	{
-		$links[] = $line;
+		$links[] = str_replace(PHP_EOL, "", $line);
 	}
 }
 fclose($f);
@@ -264,9 +266,6 @@ while(!feof($f))
 }
 fclose($f);
 
-$result = "/var/www/html/linktraveler/database/result/result_".$date.".html";
-$fp = fopen($result, "w");
-fclose($fp);
 
 foreach ($links as $url)						// Проход по внешним ссылкам
 {
@@ -359,8 +358,9 @@ foreach ($new_used_links as $u_link)
 $time = microtime(true) - $start; // Выключение таймера
 printf('<br>Script was in process for %.4F sec.', $time);
 $content = ob_get_contents();
-$f = fopen($result, "w");
-fwrite($f, $content);
-fclose($f); 
+$result = "/var/www/html/linktraveler/database/result/result_".$date.".html";
+$fp = fopen($result, "w");
+fwrite($fp, $content);
+fclose($fp); 
 
 ?>
