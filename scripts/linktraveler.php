@@ -269,7 +269,6 @@ $result = "/var/www/html/linktraveler/database/result/result_".$date.".html";
 $fp = fopen($result, "w");
 fclose($fp);
 
-
 foreach ($links as $url)						// Проход по внешним ссылкам
 {
 	$start_link = microtime(true); // Включение таймера для ссылки
@@ -361,9 +360,9 @@ foreach ($new_used_links as $u_link)
 $time = microtime(true) - $start; // Выключение таймера
 printf('<br>Script was in process for %.4F sec.', $time);
 $content = ob_get_contents();
-
 $f = fopen($result, "w");
 fwrite($f, $content);
 fclose($f); 
+
 
 ?>
