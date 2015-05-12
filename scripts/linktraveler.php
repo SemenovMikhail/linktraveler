@@ -1,4 +1,5 @@
 <?php
+
 include '/var/www/html/linktraveler/lib/simple_html_dom.php';
 include '/var/www/html/linktraveler/lib/http_build_url.inc';
 require '/var/www/html/linktraveler/lib/vendor/autoload.php';
@@ -153,7 +154,7 @@ function LinkProceed ($f_url)
 		return 0;
 		
 	$hostname = $parse[host];	
-	$data = @file_get_html($replace);
+	$data = file_get_html($replace);
 
 	//$titles = find_inner_text($data, "title");
 	//foreach ($titles as $title)
@@ -215,7 +216,10 @@ function LinkProceed ($f_url)
 	}	
 }
 
-ob_start();
+$d = @file_get_html("http://google.com");
+var_dump($d);
+
+//ob_start();
 error_reporting(E_ALL ^ E_NOTICE);	
 set_time_limit(0);	// Чтобы скрипт не зависал через 30 секунд
 $start = microtime(true); // Включение таймера для скрипта
@@ -234,7 +238,8 @@ $errors = array("HTTP/1.1 400 Bad Request", "HTTP/1.1 403 Forbidden", "HTTP/1.1 
 $internal_links_limit = 150;
 $time_limit = 15;
 
-$myFile = $argv[1];
+//$myFile = $argv[1];
+$myFile = "http://188.120.228.58/linktraveler/database/new/2.txt";
 $f = fopen($myFile, "r");
 while(!feof($f)) 
 { 
@@ -359,7 +364,7 @@ foreach ($new_used_links as $u_link)
 	file_put_contents("/var/www/html/linktraveler/database/old/oldLinks.txt", PHP_EOL.$u_link, FILE_APPEND);
 $time = microtime(true) - $start; // Выключение таймера
 printf('<br>Script was in process for %.4F sec.', $time);
-$content = ob_get_contents();
+//$content = ob_get_contents();
 $f = fopen($result, "w");
 fwrite($f, $content);
 fclose($f); 
