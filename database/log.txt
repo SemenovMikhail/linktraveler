@@ -13,3 +13,48 @@ Script finished at: 2015-05-13_12-10-13
 
 Script started at: 2015-05-14_06-47-34 . Input links url: http://linktraveler.ru/linktraveler/database/new/newLinks_2015-05-13_11-30-29.txt
 Script finished at: 2015-05-14_08-25-38
+
+Script started at: 2015-05-14_16-59-49 . Input links url: http://linktraveler.ru/linktraveler/database/new/test.txt
+Script finished at: 2015-05-14_17-00-29
+
+Script started at: 2015-05-14_17-07-42 . Input links url: http://linktraveler.ru/linktraveler/database/new/test.txt
+Script finished at: 2015-05-14_17-33-36
+
+Script started at: 2015-05-14_17-41-05 . Input links url: http://linktraveler.ru/linktraveler/database/new/test.txt
+Script finished at: 2015-05-14_18-07-32
+
+Script finished at: 2015-05-14_18-51-51
+
+Script started at: 2015-05-14_18-53-41 . Input links url: http://linktraveler.ru/linktraveler/database/new/test.txt
+Script finished at: 2015-05-14_18-54-27
+
+Script started at: 2015-05-14_19-02-35 . Input links url: http://linktraveler.ru/linktraveler/database/new/test.txt
+Script finished at: 2015-05-14_19-03-20
+
+Script started at: 2015-05-14_19-06-18 . Input links url: http://linktraveler.ru/linktraveler/database/new/test.txt
+Script finished at: 2015-05-14_19-06-55
+
+Script started at: 2015-05-14_19-10-51 . Input links url: http://linktraveler.ru/linktraveler/database/new/test.txt
+Script finished at: 2015-05-14_19-11-28
+
+Script started at: 2015-05-14_19-16-29 . Input links url: http://linktraveler.ru/linktraveler/database/new/test.txt
+Script finished at: 2015-05-14_19-17-07
+
+Script started at: 2015-05-14_19-22-49 . Input links url: http://linktraveler.ru/linktraveler/database/new/test.txt
+Script finished at: 2015-05-14_19-23-24
+
+Script started at: 2015-05-14_19-34-53 . Input links url: http://linktraveler.ru/linktraveler/database/new/test.txt
+Script finished at: 2015-05-14_19-35-32
+
+Script started at: 2015-05-14_19-53-01 . Input links url: http://linktraveler.ru/linktraveler/database/new/test.txt
+Script finished at: 2015-05-14_19-53-38
+
+Script started at: 2015-05-14_20-05-23 . Input links url: http://linktraveler.ru/linktraveler/database/new/test.txt
+Script finished at: 2015-05-14_20-05-23
+
+Script started at: 2015-05-14_20-06-00 . Input links url: http://linktraveler.ru/linktraveler/database/new/test.txt
+Script finished at: 2015-05-14_20-06-00
+
+Script started at: 2015-05-14_20-07-21 . Input links url: http://linktraveler.ru/linktraveler/database/new/test.txt
+Script started at: 2015-05-14_20-12-52 . Input links url: http://linktraveler.ru/linktraveler/database/new/test.txt
+Script finished at: 2015-05-14_20-32-01

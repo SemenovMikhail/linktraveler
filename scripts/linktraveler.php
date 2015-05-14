@@ -133,15 +133,15 @@ function find_inner_text($html, $tag)
 	}
 }
 
-class ip-country
+class ipcountry
 {
     public $struct_ip;
     public $struct_country;
 }
 
-function check_country($ip)
+function check_country($ip_local)
 {
-	$country_url = "http://ipgeobase.ru/?address=".$ip."&search=%C8%F1%EA%E0%F2%FC";
+	$country_url = "http://ipgeobase.ru/?address=".$ip_local."&search=%C8%F1%EA%E0%F2%FC";
 	$country_data = file_get_html($country_url);
 	$country_array = find_inner_text($country_data, 'b');
 	return $country_array[0];
@@ -241,7 +241,8 @@ $correct_extensions = array("htm", "html", "php", "htmls", "aspx", "asp");
 $errors = array("HTTP/1.1 400 Bad Request", "HTTP/1.1 403 Forbidden", "HTTP/1.1 404 Not Found",
 "HTTP/1.1 405 Method Not Allowed", "HTTP/1.1 408 Request Timeout", "HTTP/1.1 500 Internal Server Error",
 "HTTP/1.1 502 Bad Gateway", "HTTP/1.1 504 Gateway Timeout");
-$ip-country_array = array();
+$ipcountry_array = array();
+$local_used_links = array();
 $internal_links_limit = 150;
 $time_limit = 15;
 
@@ -345,12 +346,9 @@ foreach ($external_links as $link)
 	{
 		$ext_parse = parse_url($link);
 		$ex_link = $ext_parse[scheme]."://".$ext_parse[host];
-		var_dump($ex_link);
-		var_dump($used_links);
-		var_dump($new_used_links);
-		if (in_array($ex_link, $used_links) || in_array($ex_link, $new_used_links))
+		if (in_array($ex_link, $local_used_links) || in_array($ex_link, $used_links) || in_array($ex_link, $new_used_links))
 			continue;
-		$new_used_links[] = $ex_link;
+		$local_used_links[] = $ex_link;
 		$ext_host = preg_replace('/^www\./', '',  $ext_parse[host]);
 		$response = $client->post('http://seo.sed.de/links/start/search', [
 				'body' => [
@@ -369,7 +367,7 @@ foreach ($external_links as $link)
 			file_put_contents($newLinks_file, PHP_EOL.$link, FILE_APPEND);
 			$ip = gethostbyname($ext_parse[host]);
 			$country = null;
-			foreach($ip-country_array as $struct) 
+			foreach($ipcountry_array as $struct) 
 			{
 				if ($ip == $struct->struct_ip) 
 				{
@@ -377,13 +375,13 @@ foreach ($external_links as $link)
 					break;
 				}
 			}
-			if ($country = null)
+			if ($country == null)
 			{
 				$country = check_country($ip);
-				$new_ip-country = new ip-country();
-				$new_ip-country->struct_ip = $ip;
-				$new_ip-country->struct_country = $country;
-				ip-country_array[] = $new_ip-country;
+				$new_ipcountry = new ipcountry();
+				$new_ipcountry->struct_ip = $ip;
+				$new_ipcountry->struct_country = $country;
+				$ipcountry_array[] = $new_ipcountry;
 			}
 			echo "$link is <font style=\"background-color: Green\">valid</font> country: $country<br>";
 		}				
