@@ -148,8 +148,6 @@ function LinkProceed ($f_url)
 	
 	$replace = str_replace (' ','%20',$f_url);
 	
-	echo "<br>".$replace."<br>";
-
 	if(check_url_for_errors($replace))
 		return 0;
 		
@@ -186,9 +184,6 @@ function LinkProceed ($f_url)
 
 		if (preg_replace('/^www\./', '',  $local_hostname) == preg_replace('/^www\./', '',$hostname)) 	// Внутренняя ссылка
 		{
-			//$local_parse[scheme] = $parse[scheme];
-			//$local_parse[host] = $hostname;
-			//$local_link = http_build_url($local_parse);
 			if (!in_array($local_link, $internal_links))
 			{
 				if (!check_extension($local_parse[path], $correct_extensions))
@@ -216,10 +211,7 @@ function LinkProceed ($f_url)
 	}	
 }
 
-$d = @file_get_html("http://google.com");
-var_dump($d);
-
-//ob_start();
+ob_start();
 error_reporting(E_ALL ^ E_NOTICE);	
 set_time_limit(0);	// Чтобы скрипт не зависал через 30 секунд
 $start = microtime(true); // Включение таймера для скрипта
@@ -238,8 +230,7 @@ $errors = array("HTTP/1.1 400 Bad Request", "HTTP/1.1 403 Forbidden", "HTTP/1.1 
 $internal_links_limit = 150;
 $time_limit = 15;
 
-//$myFile = $argv[1];
-$myFile = "http://188.120.228.58/linktraveler/database/new/2.txt";
+$myFile = $argv[1];
 $f = fopen($myFile, "r");
 while(!feof($f)) 
 { 
@@ -253,13 +244,7 @@ fclose($f);
 
 date_default_timezone_set('UTC');
 $date = date("Y-m-d_H-i-s");
-$newLinks_file = "/var/www/html/linktraveler/database/new/newLinks_".$date.".txt";
-$fp = fopen($newLinks_file, "w");
-fclose($fp);
 
-$emails_file = "/var/www/html/linktraveler/database/emails/emails_".$date.".txt";
-$fp = fopen($emails_file, "w");
-fclose($fp);
 
 $f = fopen("/var/www/html/linktraveler/database/old/oldLinks.txt", "r");
 while(!feof($f)) 
@@ -277,7 +262,9 @@ fclose($fp);
 foreach ($links as $url)						// Проход по внешним ссылкам
 {
 	$start_link = microtime(true); // Включение таймера для ссылки
-	if (in_array($url, $used_links) || in_array($url, $new_used_links))
+	$used_parse = parse_url($url);
+	$used_link = $used_parse[scheme]."://".$used_parse[host];
+	if (in_array($used_link, $used_links) || in_array($used_link, $new_used_links))
 		continue;
 	$internal_links = array();
 	$average_time = 0;
@@ -285,8 +272,7 @@ foreach ($links as $url)						// Проход по внешним ссылкам
 	echo "EXTERNAL ";
 	LinkProceed($url);
 	
-	$used_parse = parse_url($url);
-	$new_used_links[] = $used_parse[scheme]."://".$used_parse[host];
+	$new_used_links[] = $used_link;
 	
 	$internal_links_index = 0;					// Проход по внутренним ссылкам
 	$internal_links_count = count($internal_links);
@@ -314,13 +300,26 @@ foreach ($links as $url)						// Проход по внешним ссылкам
 
 $email_count = count($email_array);
 echo "<br>Emails: ".$email_count."<br>";
-for ($i = 0; $i < $email_count; $i++)
+if ($email_count > 0)
 {
-	echo $email_array[$i]." : ".$email_link[$i]."<br>";
-	file_put_contents($emails_file, PHP_EOL.$email_array[$i], FILE_APPEND);
+	
+	$emails_file = "/var/www/html/linktraveler/database/emails/emails_".$date.".txt";
+	$fp = fopen($emails_file, "w");
+	fclose($fp);
+	for ($i = 0; $i < $email_count; $i++)
+	{
+		echo $email_array[$i]." : ".$email_link[$i]."<br>";
+		file_put_contents($emails_file, PHP_EOL.$email_array[$i], FILE_APPEND);
+	}
 }
 
 echo "<br>External links: ".count($external_links)."<br>";
+if (count($external_links) > 0)
+{
+	$newLinks_file = "/var/www/html/linktraveler/database/new/newLinks_".$date.".txt";
+	$fp = fopen($newLinks_file, "w");
+	fclose($fp);
+}
 foreach ($external_links as $link)
 {
 	if(check_url_for_errors($link))
@@ -350,11 +349,10 @@ foreach ($external_links as $link)
 		{
 			file_put_contents($newLinks_file, PHP_EOL.$link, FILE_APPEND);
 			$ip = gethostbyname($ext_parse[host]);
-			$country = "not ready";
-			//$country_url = "http://ipgeobase.ru/?address=".$ip."&search=%C8%F1%EA%E0%F2%FC";
-			//$country_data = @file_get_html($country_url);
-			//$country_array = find_inner_text($country_data, 'b');
-			//$country = $country_array[0];
+			$country_url = "http://ipgeobase.ru/?address=".$ip."&search=%C8%F1%EA%E0%F2%FC";
+			$country_data = file_get_html($country_url);
+			$country_array = find_inner_text($country_data, 'b');
+			$country = $country_array[0];
 			echo "$link is <font style=\"background-color: Green\">valid</font> country: $country<br>";
 		}				
 	}
@@ -364,10 +362,12 @@ foreach ($new_used_links as $u_link)
 	file_put_contents("/var/www/html/linktraveler/database/old/oldLinks.txt", PHP_EOL.$u_link, FILE_APPEND);
 $time = microtime(true) - $start; // Выключение таймера
 printf('<br>Script was in process for %.4F sec.', $time);
-//$content = ob_get_contents();
+$content = ob_get_contents();
 $f = fopen($result, "w");
 fwrite($f, $content);
 fclose($f); 
-
-
+$log_path = "/var/www/html/linktraveler/database/log.txt";
+$date = date("Y-m-d_H-i-s");
+$line = "Script finished at: ".$date;
+file_put_contents($log_path, PHP_EOL.$line.PHP_EOL, FILE_APPEND);
 ?>

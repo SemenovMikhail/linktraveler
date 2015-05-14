@@ -1,0 +1,15 @@
+
+Script starts at: 2015-05-13_11-25-41 . Input links url: http://linktraveler.ru/linktraveler/database/new/newLinks.txt
+Script finished at: 2015-05-13_11-26-19
+
+Script starts at: 2015-05-13_11-27-11 . Input links url: http://linktraveler.ru/linktraveler/database/new/newLinks.txt
+Script finished at: 2015-05-13_11-27-40
+
+Script started at: 2015-05-13_11-30-29 . Input links url: http://linktraveler.ru/linktraveler/database/new/newLinks.txt
+Script finished at: 2015-05-13_11-33-29
+
+Script started at: 2015-05-13_12-07-13 . Input links url: http://linktraveler.ru/linktraveler/database/new/newLinks.txt
+Script finished at: 2015-05-13_12-10-13
+
+Script started at: 2015-05-14_06-47-34 . Input links url: http://linktraveler.ru/linktraveler/database/new/newLinks_2015-05-13_11-30-29.txt
+Script finished at: 2015-05-14_08-25-38
