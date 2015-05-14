@@ -133,6 +133,20 @@ function find_inner_text($html, $tag)
 	}
 }
 
+class ip-country
+{
+    public $struct_ip;
+    public $struct_country;
+}
+
+function check_country($ip)
+{
+	$country_url = "http://ipgeobase.ru/?address=".$ip."&search=%C8%F1%EA%E0%F2%FC";
+	$country_data = file_get_html($country_url);
+	$country_array = find_inner_text($country_data, 'b');
+	return $country_array[0];
+}
+
 function LinkProceed ($f_url) 
 {
 	global $external_links, $email_array, $email_link, $internal_links, $correct_extensions, $find_elements, $used_links, $new_used_links;  // Init
@@ -164,7 +178,7 @@ function LinkProceed ($f_url)
 	{
 		if ($local_link == "")
 			continue;
-		preg_match("/[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})/i", $local_link, $email_matches);								// Проверка на email
+		preg_match("/[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})/i", $local_link, $email_matches);								// Check email
 		if (count($email_matches) > 0)
 		{
 			foreach ($email_matches as $local_email)
@@ -182,7 +196,7 @@ function LinkProceed ($f_url)
 		$local_parse = parse_url($local_link);
 		$local_hostname = $local_parse[host];
 
-		if (preg_replace('/^www\./', '',  $local_hostname) == preg_replace('/^www\./', '',$hostname)) 	// Внутренняя ссылка
+		if (preg_replace('/^www\./', '',  $local_hostname) == preg_replace('/^www\./', '',$hostname)) 	// Internal link
 		{
 			if (!in_array($local_link, $internal_links))
 			{
@@ -196,7 +210,7 @@ function LinkProceed ($f_url)
 				continue;
 			}
 		}		
-		else																	// Внешняя ссылка
+		else																	// External link
 		{
 			$ex_parse = parse_url($local_link);
 			$ex_link = $ex_parse[scheme]."://".$ex_parse[host];
@@ -213,8 +227,8 @@ function LinkProceed ($f_url)
 
 ob_start();
 error_reporting(E_ALL ^ E_NOTICE);	
-set_time_limit(0);	// Чтобы скрипт не зависал через 30 секунд
-$start = microtime(true); // Включение таймера для скрипта
+set_time_limit(0);	// 
+$start = microtime(true);
 $external_links = array();	// Init
 $email_array = array();
 $email_link = array();
@@ -227,6 +241,7 @@ $correct_extensions = array("htm", "html", "php", "htmls", "aspx", "asp");
 $errors = array("HTTP/1.1 400 Bad Request", "HTTP/1.1 403 Forbidden", "HTTP/1.1 404 Not Found",
 "HTTP/1.1 405 Method Not Allowed", "HTTP/1.1 408 Request Timeout", "HTTP/1.1 500 Internal Server Error",
 "HTTP/1.1 502 Bad Gateway", "HTTP/1.1 504 Gateway Timeout");
+$ip-country_array = array();
 $internal_links_limit = 150;
 $time_limit = 15;
 
@@ -259,9 +274,9 @@ $result = "/var/www/html/linktraveler/database/result/result_".$date.".html";
 $fp = fopen($result, "w");
 fclose($fp);
 
-foreach ($links as $url)						// Проход по внешним ссылкам
+foreach ($links as $url)						// External links cicle
 {
-	$start_link = microtime(true); // Включение таймера для ссылки
+	$start_link = microtime(true);
 	$used_parse = parse_url($url);
 	$used_link = $used_parse[scheme]."://".$used_parse[host];
 	if (in_array($used_link, $used_links) || in_array($used_link, $new_used_links))
@@ -274,7 +289,7 @@ foreach ($links as $url)						// Проход по внешним ссылкам
 	
 	$new_used_links[] = $used_link;
 	
-	$internal_links_index = 0;					// Проход по внутренним ссылкам
+	$internal_links_index = 0;					// Internal links cicle
 	$internal_links_count = count($internal_links);
 	$check = false;
 	while (!$check && $internal_links_index < $internal_links_limit && $average_time < $time_limit)
@@ -290,7 +305,7 @@ foreach ($links as $url)						// Проход по внешним ссылкам
 		{
 			$check = true;
 		}
-		$time = microtime(true) - $start_internal; // Выключение таймера
+		$time = microtime(true) - $start_internal;
 		printf('Link was in process for %.4F sec.<br>', $time);
 		$time = microtime(true) - $start_link;
 		$average_time = ($time / $internal_links_index);
@@ -330,8 +345,12 @@ foreach ($external_links as $link)
 	{
 		$ext_parse = parse_url($link);
 		$ex_link = $ext_parse[scheme]."://".$ext_parse[host];
+		var_dump($ex_link);
+		var_dump($used_links);
+		var_dump($new_used_links);
 		if (in_array($ex_link, $used_links) || in_array($ex_link, $new_used_links))
 			continue;
+		$new_used_links[] = $ex_link;
 		$ext_host = preg_replace('/^www\./', '',  $ext_parse[host]);
 		$response = $client->post('http://seo.sed.de/links/start/search', [
 				'body' => [
@@ -349,10 +368,23 @@ foreach ($external_links as $link)
 		{
 			file_put_contents($newLinks_file, PHP_EOL.$link, FILE_APPEND);
 			$ip = gethostbyname($ext_parse[host]);
-			$country_url = "http://ipgeobase.ru/?address=".$ip."&search=%C8%F1%EA%E0%F2%FC";
-			$country_data = file_get_html($country_url);
-			$country_array = find_inner_text($country_data, 'b');
-			$country = $country_array[0];
+			$country = null;
+			foreach($ip-country_array as $struct) 
+			{
+				if ($ip == $struct->struct_ip) 
+				{
+					$country = $struct->struct_country;
+					break;
+				}
+			}
+			if ($country = null)
+			{
+				$country = check_country($ip);
+				$new_ip-country = new ip-country();
+				$new_ip-country->struct_ip = $ip;
+				$new_ip-country->struct_country = $country;
+				ip-country_array[] = $new_ip-country;
+			}
 			echo "$link is <font style=\"background-color: Green\">valid</font> country: $country<br>";
 		}				
 	}
@@ -360,7 +392,7 @@ foreach ($external_links as $link)
 
 foreach ($new_used_links as $u_link)
 	file_put_contents("/var/www/html/linktraveler/database/old/oldLinks.txt", PHP_EOL.$u_link, FILE_APPEND);
-$time = microtime(true) - $start; // Выключение таймера
+$time = microtime(true) - $start;
 printf('<br>Script was in process for %.4F sec.', $time);
 $content = ob_get_contents();
 $f = fopen($result, "w");
