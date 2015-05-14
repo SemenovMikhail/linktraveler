@@ -135,7 +135,6 @@ http://www.mercedeswego.pt
 http://www.autopremium.pt
 http://24horastt.cronobandeira.com
 http://www.podergrafico.pt
-http://www.hellsangelscostablanca.es
 http://needicoes.blogspot.pt
 http://needicoes.blogspot.pt
 http://www.akmadeira.com
@@ -301,5 +300,16 @@ http://manueldinis.blogs.sapo.pt
 https://www.anunciosdeveiculos.pt
 http://www.circuitodaboavista.com/
 http://www.multimoto.pt
-
 http://www.hellsangelscostablanca.es
+
+http://www.benelli.pt
+http://www.lambrettaoriginal.pt
+http://www.arctic-cat.pt
+http://www.aeon.pt
+http://www.makchines.com
+http://blogdosanco.blogspot.ru
+http://blogmulsanne.blogspot.ru
+http://www.degennaromotors.blogspot.ru
+http://www.marcelmarchesi.blogspot.ru
+http://www.automodelli.com.br
+http://racingillustration.blogspot.ru
