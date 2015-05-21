@@ -58,3 +58,112 @@ Script finished at: 2015-05-14_20-06-00
 Script started at: 2015-05-14_20-07-21 . Input links url: http://linktraveler.ru/linktraveler/database/new/test.txt
 Script started at: 2015-05-14_20-12-52 . Input links url: http://linktraveler.ru/linktraveler/database/new/test.txt
 Script finished at: 2015-05-14_20-32-01
+
+Script started at: 2015-05-14_20-55-12 . Input links url: http://linktraveler.ru/linktraveler/database/new/test.txt
+Script finished at: 2015-05-14_21-29-03
+
+Script started at: 2015-05-15_07-24-58 . Input links url: http://linktraveler.ru/linktraveler/database/new/newLinks_2015-05-14_20-55-12.txt
+Script finished at: 2015-05-15_07-52-48
+
+Script started at: 2015-05-15_08-01-48 . Input links url: http://linktraveler.ru/linktraveler/database/new/newLinks_2015-05-15_07-24-58.txt
+Script finished at: 2015-05-15_08-02-27
+
+Script started at: 2015-05-15_09-31-35 . Input links url: http://linktraveler.ru/linktraveler/database/new/newLinks_2015-05-15_08-01-48.txt
+Script finished at: 2015-05-15_11-28-57
+
+Script started at: 2015-05-15_12-43-48 . Input links url: http://linktraveler.ru/linktraveler/database/new/test.txt
+2015-05-15_12-44-04 : 1 / 1 links was proceed
+Script finished at: 2015-05-15_12-44-58
+
+Script started at: 2015-05-15_12-49-24 . Input links url: http://linktraveler.ru/linktraveler/database/new/test.txt
+2015-05-15_12-49-40 : 1 / 1 links was proceed
+2015-05-15_12-49-40: links in post-processing
+Script finished at: 2015-05-15_12-50-02
+
+2015-05-15_12-51-48: script started. Input links url: http://linktraveler.ru/linktraveler/database/new/test.txt
+2015-05-15_12-52-04 : 1 / 1 links was proceed
+2015-05-15_12-52-04: links in post-processing
+2015-05-15_12-52-27 : Script finished
+
+2015-05-15_12-54-06: script started. Input links url: http://linktraveler.ru/linktraveler/database/new/newLinks_2015-05-15_09-31-35.txt
+2015-05-15_13-07-36 : 1 / 37 links was proceed
+2015-05-15_13-07-42 : 2 / 37 links was proceed
+2015-05-15_13-10-56 : 3 / 37 links was proceed
+2015-05-15_13-14-26 : 4 / 37 links was proceed
+2015-05-15_13-17-04 : 5 / 37 links was proceed
+2015-05-15_13-18-33 : 6 / 37 links was proceed
+2015-05-15_13-18-59 : 7 / 37 links was proceed
+2015-05-15_13-25-52 : 8 / 37 links was proceed
+2015-05-15_13-31-13 : 9 / 37 links was proceed
+2015-05-15_13-31-15 : 10 / 37 links was proceed
+2015-05-15_13-35-45 : 11 / 37 links was proceed
+2015-05-15_13-37-20 : 12 / 37 links was proceed
+2015-05-15_13-55-20 : 13 / 37 links was proceed
+2015-05-15_14-01-36 : 14 / 37 links was proceed
+2015-05-15_14-05-35 : 15 / 37 links was proceed
+2015-05-15_14-05-36 : 16 / 37 links was proceed
+2015-05-15_14-05-37 : 17 / 37 links was proceed
+2015-05-15_14-07-19 : 18 / 37 links was proceed
+2015-05-15_14-11-33 : 19 / 37 links was proceed
+2015-05-15_14-12-17 : 20 / 37 links was proceed
+2015-05-15_14-12-21 : 21 / 37 links was proceed
+2015-05-15_14-16-17 : 22 / 37 links was proceed
+2015-05-15_14-18-38 : 23 / 37 links was proceed
+2015-05-15_14-18-39 : 24 / 37 links was proceed
+2015-05-15_14-19-20 : 25 / 37 links was proceed
+2015-05-15_14-19-28 : 26 / 37 links was proceed
+2015-05-15_14-24-29 : 27 / 37 links was proceed
+2015-05-15_14-29-53 : 28 / 37 links was proceed
+2015-05-15_14-35-24 : 29 / 37 links was proceed
+2015-05-15_14-35-37 : 30 / 37 links was proceed
+2015-05-15_14-38-26 : 31 / 37 links was proceed
+2015-05-15_14-41-43 : 32 / 37 links was proceed
+2015-05-15_14-44-33 : 33 / 37 links was proceed
+2015-05-15_14-48-47 : 34 / 37 links was proceed
+2015-05-15_14-48-47: links in post-processing
+2015-05-15_17-11-40 : Script finished. Result url: /var/www/html/linktraveler/database/result/result_2015-05-15_12-54-06.html
+
+2015-05-16_13-30-30: script started. Input links url: http://linktraveler.ru/linktraveler/database/new/newLinks_2015-05-15_12-54-06.txt
+2015-05-16_13-31-57 : 1 / 13 links was proceed
+2015-05-16_13-31-58 : 2 / 13 links was proceed
+2015-05-16_13-31-58 : 3 / 13 links was proceed
+2015-05-16_13-32-15 : 4 / 13 links was proceed
+2015-05-16_13-33-27 : 5 / 13 links was proceed
+2015-05-16_13-38-53 : 6 / 13 links was proceed
+2015-05-16_13-39-25 : 7 / 13 links was proceed
+2015-05-16_13-39-38 : 8 / 13 links was proceed
+2015-05-16_13-39-48 : 9 / 13 links was proceed
+2015-05-16_13-42-17 : 10 / 13 links was proceed
+2015-05-16_13-42-17 : 11 / 13 links was proceed
+2015-05-16_13-42-17 : 12 / 13 links was proceed
+2015-05-16_13-46-56 : 13 / 13 links was proceed
+2015-05-16_13-46-56: links in post-processing
+2015-05-16_14-10-21 : Script finished. Result url: /var/www/html/linktraveler/database/result/result_2015-05-16_13-30-30.html
+
+2015-05-18_09-19-58: script started. Input links url: http://linktraveler.ru/linktraveler/database/new/newLinks_2015-05-16_13-30-30.txt
+2015-05-18_09-29-04 : 1 / 9 links was proceed
+2015-05-18_09-31-18 : 2 / 9 links was proceed
+2015-05-18_09-31-19 : 3 / 9 links was proceed
+2015-05-18_09-31-19 : 4 / 9 links was proceed
+2015-05-18_09-31-20 : 5 / 9 links was proceed
+2015-05-18_09-31-21 : 6 / 9 links was proceed
+2015-05-18_09-31-55 : 7 / 9 links was proceed
+2015-05-18_09-32-07 : 8 / 9 links was proceed
+2015-05-18_09-33-55 : 9 / 9 links was proceed
+2015-05-18_09-33-55: links in post-processing
+2015-05-18_09-42-51 : Script finished. Result url: /var/www/html/linktraveler/database/result/result_2015-05-18_09-19-58.html
+
+2015-05-18_11-51-21: script started. Input links url: http://linktraveler.ru/linktraveler/database/new/newLinks_2015-05-18_09-19-58.txt
+2015-05-18_11-54-32 : 1 / 3 links was proceed
+2015-05-18_11-56-31 : 2 / 3 links was proceed
+2015-05-18_11-58-57 : 3 / 3 links was proceed
+2015-05-18_11-58-57: links in post-processing
+2015-05-18_12-15-58 : Script finished. Result url: /var/www/html/linktraveler/database/result/result_2015-05-18_11-51-21.html
+
+2015-05-18_17-39-06: script started. Input links url: http://linktraveler.ru/linktraveler/database/new/newLinks_2015-05-18_11-51-21.txt
+2015-05-18_17-39-24 : 1 / 4 links was proceed
+2015-05-18_17-41-32 : 2 / 4 links was proceed
+2015-05-18_17-43-43 : 3 / 4 links was proceed
+2015-05-18_17-47-48 : 4 / 4 links was proceed
+2015-05-18_17-47-48: links in post-processing
+2015-05-18_18-05-20 : Script finished. Result url: /var/www/html/linktraveler/database/result/result_2015-05-18_17-39-06.html

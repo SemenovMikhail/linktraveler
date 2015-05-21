@@ -245,6 +245,7 @@ $ipcountry_array = array();
 $local_used_links = array();
 $internal_links_limit = 150;
 $time_limit = 15;
+$log_path = "/var/www/html/linktraveler/database/log.txt";
 
 $myFile = $argv[1];
 $f = fopen($myFile, "r");
@@ -275,13 +276,22 @@ $result = "/var/www/html/linktraveler/database/result/result_".$date.".html";
 $fp = fopen($result, "w");
 fclose($fp);
 
+$external_links_count = count($links);
+$external_links_index = 0;
+
 foreach ($links as $url)						// External links cicle
 {
 	$start_link = microtime(true);
 	$used_parse = parse_url($url);
 	$used_link = $used_parse[scheme]."://".$used_parse[host];
 	if (in_array($used_link, $used_links) || in_array($used_link, $new_used_links))
+	{
+		$external_links_index++;
+		$date_log = date("Y-m-d_H-i-s");
+		$line = "$date_log : $external_links_index / $external_links_count links was proceed";
+		file_put_contents($log_path, PHP_EOL.$line, FILE_APPEND);
 		continue;
+	}
 	$internal_links = array();
 	$average_time = 0;
 	
@@ -312,8 +322,15 @@ foreach ($links as $url)						// External links cicle
 		$average_time = ($time / $internal_links_index);
 		printf('Average time:  %.4F sec.<br>', $average_time);
 	}
+	$external_links_index++;
+	$date_log = date("Y-m-d_H-i-s");
+	$line = "$date_log : $external_links_index / $external_links_count links was proceed";
+	file_put_contents($log_path, PHP_EOL.$line, FILE_APPEND);
 }
 
+$date_log = date("Y-m-d_H-i-s");
+$line = "$date_log: links in post-processing";
+file_put_contents($log_path, PHP_EOL.$line, FILE_APPEND);
 $email_count = count($email_array);
 echo "<br>Emails: ".$email_count."<br>";
 if ($email_count > 0)
@@ -340,7 +357,7 @@ foreach ($external_links as $link)
 {
 	if(check_url_for_errors($link))
 	{
-		echo "$link is <font color=\"Red\">not valid</font><br>";
+		echo "<a href='$link'>$link</a> is <font color=\"Red\">not valid</font><br>";
 	}
 	else
 	{
@@ -361,7 +378,7 @@ foreach ($external_links as $link)
 		$in_database_check = strpos($body, $findme);
 
 		if ($in_database_check !== false)
-			echo "$link is in <font style=\"background-color: Red\">database</font><br>";
+			echo "<a href='$link'>$link</a> is in <font style=\"background-color: Red\">database</font><br>";
 		else
 		{
 			file_put_contents($newLinks_file, PHP_EOL.$link, FILE_APPEND);
@@ -383,7 +400,7 @@ foreach ($external_links as $link)
 				$new_ipcountry->struct_country = $country;
 				$ipcountry_array[] = $new_ipcountry;
 			}
-			echo "$link is <font style=\"background-color: Green\">valid</font> country: $country<br>";
+			echo "<a href='$link'>$link</a> is <font style=\"background-color: Green\">valid</font> country: $country<br>";
 		}				
 	}
 }
@@ -398,6 +415,6 @@ fwrite($f, $content);
 fclose($f); 
 $log_path = "/var/www/html/linktraveler/database/log.txt";
 $date = date("Y-m-d_H-i-s");
-$line = "Script finished at: ".$date;
+$line = "$date : Script finished. Result url: $result";
 file_put_contents($log_path, PHP_EOL.$line.PHP_EOL, FILE_APPEND);
 ?>
