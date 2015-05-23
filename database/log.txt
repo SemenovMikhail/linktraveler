@@ -412,3 +412,53 @@ Script finished at: 2015-05-15_12-50-02
 2015-05-23_19-15-27 : 1 / 1 links was proceed
 2015-05-23_19-15-27: links in post-processing
 2015-05-23_19-15-41 : Script finished. Result url: http://linktraveler.ru/linktraveler/database/result/result_2015-05-23_19-15-12.html
+
+2015-05-23_19-42-02: script started. Input links url: http://linktraveler.ru/linktraveler/database/new/test2.txt
+2015-05-23_19-43-20 : 1 / 46 links was proceed
+2015-05-23_20-02-50 : 2 / 46 links was proceed
+2015-05-23_20-08-16 : 3 / 46 links was proceed
+2015-05-23_20-08-51 : 4 / 46 links was proceed
+2015-05-23_20-09-56 : 5 / 46 links was proceed
+2015-05-23_20-12-06 : 6 / 46 links was proceed
+2015-05-23_20-12-18 : 7 / 46 links was proceed
+2015-05-23_20-13-08 : 8 / 46 links was proceed
+2015-05-23_20-13-18 : 9 / 46 links was proceed
+2015-05-23_20-13-56 : 10 / 46 links was proceed
+2015-05-23_20-14-08 : 11 / 46 links was proceed
+2015-05-23_20-14-19 : 12 / 46 links was proceed
+2015-05-23_20-21-49 : 13 / 46 links was proceed
+2015-05-23_20-21-56 : 14 / 46 links was proceed
+2015-05-23_20-24-55 : 15 / 46 links was proceed
+2015-05-23_20-24-55 : 16 / 46 links was proceed
+2015-05-23_20-30-53 : 17 / 46 links was proceed
+2015-05-23_20-30-54 : 18 / 46 links was proceed
+2015-05-23_20-31-26 : 19 / 46 links was proceed
+2015-05-23_20-35-23 : 20 / 46 links was proceed
+2015-05-23_20-35-29 : 21 / 46 links was proceed
+2015-05-23_20-35-31 : 22 / 46 links was proceed
+2015-05-23_20-35-33 : 23 / 46 links was proceed
+2015-05-23_20-35-35 : 24 / 46 links was proceed
+2015-05-23_20-46-57 : 25 / 46 links was proceed
+2015-05-23_20-46-58 : 26 / 46 links was proceed
+2015-05-23_20-52-18 : 27 / 46 links was proceed
+2015-05-23_20-52-37 : 28 / 46 links was proceed
+2015-05-23_20-52-39 : 29 / 46 links was proceed
+2015-05-23_20-52-42 : 30 / 46 links was proceed
+2015-05-23_20-57-26 : 31 / 46 links was proceed
+2015-05-23_21-02-57 : 32 / 46 links was proceed
+2015-05-23_21-04-17 : 33 / 46 links was proceed
+2015-05-23_21-04-22 : 34 / 46 links was proceed
+2015-05-23_21-07-48 : 35 / 46 links was proceed
+2015-05-23_21-07-49 : 36 / 46 links was proceed
+2015-05-23_21-12-50 : 37 / 46 links was proceed
+2015-05-23_21-13-19 : 38 / 46 links was proceed
+2015-05-23_21-16-07 : 39 / 46 links was proceed
+2015-05-23_21-16-09 : 40 / 46 links was proceed
+2015-05-23_21-16-21 : 41 / 46 links was proceed
+2015-05-23_21-27-07 : 42 / 46 links was proceed
+2015-05-23_21-29-03 : 43 / 46 links was proceed
+2015-05-23_21-35-12 : 44 / 46 links was proceed
+2015-05-23_21-36-03 : 45 / 46 links was proceed
+2015-05-23_21-38-56 : 46 / 46 links was proceed
+2015-05-23_21-38-56: links in post-processing
+2015-05-23_23-47-02 : Script finished. Result url: http://linktraveler.ru/linktraveler/database/result/result_2015-05-23_19-42-02.html
