@@ -11,7 +11,7 @@ if( isset( $_POST['Submit'] ) ) // РќР°С‡Р°Р»Рѕ СЃРєСЂРёРїС‚Р°
 	    $url = $_POST['inputUrl'];
 	    $log_path = "/var/www/html/linktraveler/database/log.txt";
 	    set_time_limit(0);	// Чтобы скрипт не зависал через 30 секунд
-	    date_default_timezone_set('UTC');
+	    date_default_timezone_set('Europe/Moscow');
 	    $date = date("Y-m-d_H-i-s");
 	    $line = $date.": script started. Input links url: ".$url;
 	    file_put_contents($log_path, PHP_EOL.$line, FILE_APPEND);

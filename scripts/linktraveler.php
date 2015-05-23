@@ -225,6 +225,32 @@ function LinkProceed ($f_url)
 	}	
 }
 
+
+if( isset( $_POST['buf_submit'] ) )
+{
+	$array = $_POST['buf_link'];
+
+	date_default_timezone_set('Europe/Moscow');
+	$date = date("Y-m-d_H-i-s");
+	$newLinks_file = "/var/www/html/linktraveler/database/new/newLinks_".$date.".txt";
+		$fp = fopen($newLinks_file, "w");
+		fclose($fp);
+	if(empty($array))
+	{
+		echo("Nothing is choosed");
+	}
+	else
+	{
+		foreach($array as $chosen_link)
+		{
+				file_put_contents($newLinks_file, PHP_EOL.$chosen_link, FILE_APPEND);
+		}
+		echo "<br>File is ready";
+	}
+	return 0;
+}
+
+
 ob_start();
 error_reporting(E_ALL ^ E_NOTICE);	
 set_time_limit(0);	// 
@@ -247,6 +273,7 @@ $internal_links_limit = 150;
 $time_limit = 15;
 $log_path = "/var/www/html/linktraveler/database/log.txt";
 
+//$myFile ="http://linktraveler.ru/linktraveler/database/new/test2.txt";
 $myFile = $argv[1];
 $f = fopen($myFile, "r");
 while(!feof($f)) 
@@ -259,7 +286,7 @@ while(!feof($f))
 }
 fclose($f);
 
-date_default_timezone_set('UTC');
+date_default_timezone_set('Europe/Moscow');
 $date = date("Y-m-d_H-i-s");
 
 
@@ -273,6 +300,7 @@ while(!feof($f))
 fclose($f);
 
 $result = "/var/www/html/linktraveler/database/result/result_".$date.".html";
+$result_url = "http://linktraveler.ru/linktraveler/database/result/result_".$date.".html";
 $fp = fopen($result, "w");
 fclose($fp);
 
@@ -347,24 +375,35 @@ if ($email_count > 0)
 }
 
 echo "<br>External links: ".count($external_links)."<br>";
-if (count($external_links) > 0)
-{
-	$newLinks_file = "/var/www/html/linktraveler/database/new/newLinks_".$date.".txt";
-	$fp = fopen($newLinks_file, "w");
-	fclose($fp);
-}
+echo '<form method="POST">
+	<table width="100%" cellspacing="0" cellpadding="4" border="1">
+	<tr>
+	<td width="5%">ID</td>
+	<td width="10%">Valid</td>
+	<td width="35%">Host</td>
+	<td width="20%">IP</td>
+	<td width="10%">In Seosed</td>
+	<td width="10%">Country</td>
+	<td width="10%">Add</td>
+	</tr>';
+$id_count = 0;
 foreach ($external_links as $link)
 {
+	$id_count++;
+	echo '<tr>';
 	if(check_url_for_errors($link))
 	{
-		echo "<a href='$link'>$link</a> is <font color=\"Red\">not valid</font><br>";
+		echo '<td>'.$id_count.'</td><td style="background-color: Red">false</td><td><a href="'.$link.'">'.$link.'.</a></td><td>null</td><td>null</td><td>null</td><td></td>';
+	//	echo "<a href='$link'>$link</a> is <font color=\"Red\">not valid</font><br>";
 	}
 	else
 	{
 		$ext_parse = parse_url($link);
 		$ex_link = $ext_parse[scheme]."://".$ext_parse[host];
+		$ip = gethostbyname($ext_parse[host]);
 		if (in_array($ex_link, $local_used_links) || in_array($ex_link, $used_links) || in_array($ex_link, $new_used_links))
 			continue;
+		echo '<td>'.$id_count.'</td><td style="background-color: Green">true</td><td><a href="'.$ex_link.'">'.$ex_link.'</a></td><td>'.$ip.'</td>';
 		$local_used_links[] = $ex_link;
 		$ext_host = preg_replace('/^www\./', '',  $ext_parse[host]);
 		$response = $client->post('http://seo.sed.de/links/start/search', [
@@ -378,11 +417,11 @@ foreach ($external_links as $link)
 		$in_database_check = strpos($body, $findme);
 
 		if ($in_database_check !== false)
-			echo "<a href='$link'>$link</a> is in <font style=\"background-color: Red\">database</font><br>";
+			echo '<td style="background-color: Red">in database</td><td>null</td><td><input name="buf_link[]" type="checkbox" value="'.$ex_link.'"/></td>';
+			//echo "<a href='$link'>$link</a> is in <font style=\"background-color: Red\">database</font><br>";
 		else
 		{
-			file_put_contents($newLinks_file, PHP_EOL.$link, FILE_APPEND);
-			$ip = gethostbyname($ext_parse[host]);
+			//file_put_contents($newLinks_file, PHP_EOL.$link, FILE_APPEND);
 			$country = null;
 			foreach($ipcountry_array as $struct) 
 			{
@@ -400,11 +439,15 @@ foreach ($external_links as $link)
 				$new_ipcountry->struct_country = $country;
 				$ipcountry_array[] = $new_ipcountry;
 			}
-			echo "<a href='$link'>$link</a> is <font style=\"background-color: Green\">valid</font> country: $country<br>";
+			echo '<td style="background-color: Green">valid</td><td>'.$country.'</td><td><input name="buf_link[]" type="checkbox" value="'.$ex_link.'"/></td>';
+			//echo "<a href='$link'>$link</a> is <font style=\"background-color: Green\">valid</font> country: $country<br>";
 		}				
 	}
+	echo '</tr>';
 }
-
+echo '</table>
+	<input type="submit" name="buf_submit" value="Form new links file" />
+	</form> ';
 foreach ($new_used_links as $u_link)
 	file_put_contents("/var/www/html/linktraveler/database/old/oldLinks.txt", PHP_EOL.$u_link, FILE_APPEND);
 $time = microtime(true) - $start;
@@ -415,6 +458,6 @@ fwrite($f, $content);
 fclose($f); 
 $log_path = "/var/www/html/linktraveler/database/log.txt";
 $date = date("Y-m-d_H-i-s");
-$line = "$date : Script finished. Result url: $result";
+$line = "$date : Script finished. Result url: ".$result_url;
 file_put_contents($log_path, PHP_EOL.$line.PHP_EOL, FILE_APPEND);
 ?>
