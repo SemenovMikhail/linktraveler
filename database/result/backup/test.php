@@ -1,3 +1,29 @@
+<?php
+if( isset( $_POST['buf_submit'] ) )
+{
+	$array = $_POST['buf_link'];
+
+	date_default_timezone_set('Europe/Moscow');
+	$date = date("Y-m-d_H-i-s");
+	$newLinks_file = "/var/www/html/linktraveler/database/new/newLinks_".$date.".txt";
+		$fp = fopen($newLinks_file, "w");
+		fclose($fp);
+	if(empty($array))
+	{
+		echo("Nothing is choosed");
+	}
+	else
+	{
+		foreach($array as $chosen_link)
+		{
+				file_put_contents($newLinks_file, PHP_EOL.$chosen_link, FILE_APPEND);
+		}
+		echo "<br>File is ready";
+	}
+	return 0;
+}
+?>
+<input type="submit" name="buf_submit" value="Form new links file" />
 <table width="100%" cellspacing="0" cellpadding="4" border="1">
 	<tbody><tr>
 	<td width="5%">ID</td>
