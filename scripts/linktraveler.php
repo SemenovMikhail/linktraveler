@@ -147,19 +147,9 @@ function check_country($ip_local)
 	return $country_array[0];
 }
 
-function getTreeParent ($l)
-{
-	global $tree_array;
-	if ($tree_array[$l] !== null)
-		return $tree_array[$l];
-	else
-		return false;
-}
-
 function LinkProceed ($f_url) 
 {
-	global $external_links, $email_array, $email_link, $internal_links, $correct_extensions, $find_elements, $used_links, $new_used_links,
-	$tree_array, $all_links;  // Init
+	global $external_links, $email_array, $email_link, $internal_links, $correct_extensions, $find_elements, $used_links, $new_used_links;  // Init
 	
 	if(strpos($f_url,"://")===false && substr($f_url,0,1)!="/") $f_url = "http://".$f_url;
 	
@@ -213,8 +203,6 @@ function LinkProceed ($f_url)
 				if (!check_extension($local_parse[path], $correct_extensions))
 					continue;
 				array_push($internal_links, $local_link);
-				$tree_array[$local_link] = $f_url;
-				array_push($all_links, $local_link);
 				echo "<br><font color=\"Blue\">Internal link added. </font><br>Full url: $local_link <br>";
 			}
 			else
@@ -231,8 +219,6 @@ function LinkProceed ($f_url)
 				if (!check_extension($local_parse[path], $correct_extensions))
 					continue;
 				array_push($external_links, $local_link);
-				$tree_array[$local_link] = $f_url;
-				array_push($all_links, $local_link);
 				echo "<br><font color=\"Red\">External link added. </font><br>Full url: $local_link<br>";
 			}
 		}
@@ -289,7 +275,7 @@ $internal_links_limit = 150;
 $time_limit = 15;
 $log_path = "/var/www/html/linktraveler/database/log.txt";
 
-//$myFile ="http://linktraveler.ru/linktraveler/database/new/test2.txt";
+//$myFile ="http://linktraveler.ru/linktraveler/database/new/test.txt";
 $myFile = $argv[1];
 $f = fopen($myFile, "r");
 while(!feof($f)) 
@@ -340,7 +326,6 @@ foreach ($links as $url)						// External links cicle
 	$average_time = 0;
 	
 	echo "EXTERNAL ";
-	$tree_array[$url] = null;
 	LinkProceed($url);
 	
 	$new_used_links[] = $used_link;
@@ -477,18 +462,4 @@ $log_path = "/var/www/html/linktraveler/database/log.txt";
 $date = date("Y-m-d_H-i-s");
 $line = "$date : Script finished. Result url: ".$result_url;
 file_put_contents($log_path, PHP_EOL.$line.PHP_EOL, FILE_APPEND);
-
-foreach ($all_links as $link) {
-	//$count = 1;
-	$string = "$link";
-	$buf = getTreeParent($link);
-	while ($buf !== false)
-	{
-		$string = $buf." --> ".$string;
-		$buf = getTreeParent($link);
-	}
-	echo "<br>";
-	echo "$string";
-	echo "<br>";
-}
 ?>
