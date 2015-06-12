@@ -168,10 +168,6 @@ function LinkProceed ($f_url)
 	$hostname = $parse[host];	
 	$data = file_get_html($replace);
 
-	//$titles = find_inner_text($data, "title");
-	//foreach ($titles as $title)
-	//	echo "<br>TITLE IS: ".$title."<br>";
-	
 	$find_elements = find_all_elements($data, "href", "*");
 	
 	foreach($find_elements as $local_link)
@@ -263,8 +259,6 @@ $links = array();
 $find_elements = array();
 $used_links = array();
 $new_used_links = array();
-$tree_array = array();
-$all_links = array();
 $correct_extensions = array("htm", "html", "php", "htmls", "aspx", "asp");
 $errors = array("HTTP/1.1 400 Bad Request", "HTTP/1.1 403 Forbidden", "HTTP/1.1 404 Not Found",
 "HTTP/1.1 405 Method Not Allowed", "HTTP/1.1 408 Request Timeout", "HTTP/1.1 500 Internal Server Error",
@@ -275,8 +269,8 @@ $internal_links_limit = 150;
 $time_limit = 15;
 $log_path = "/var/www/html/linktraveler/database/log.txt";
 
-//$myFile ="http://linktraveler.ru/linktraveler/database/new/test.txt";
-$myFile = $argv[1];
+$myFile ="http://linktraveler.ru/linktraveler/database/new/newLinks_2015-06-10_16-15-50.txt";
+//$myFile = $argv[1];
 $f = fopen($myFile, "r");
 while(!feof($f)) 
 { 
