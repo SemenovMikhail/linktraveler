@@ -28,12 +28,12 @@ function check_url_for_errors ($url)
 	$file_headers = @get_headers($url);
 	if ($file_headers === false)
 	{
-		echo "<br>WRONG LINK<br>";
+		//echo "<br>WRONG LINK<br>";
 		return true;
 	}
 	if(in_array($file_headers[0], $errors))
 	{
-		echo "<br>ERROR: ".$file_headers[0]."<br>";
+		//echo "<br>ERROR: ".$file_headers[0]."<br>";
 		return true;
 	}
 	else
@@ -155,7 +155,7 @@ function LinkProceed ($f_url)
 	
 	$parse = parse_url($f_url);
 	
-	echo "<font style=\"background-color: Yellow\">URL : $f_url</font><br>";
+	//echo "<font style=\"background-color: Yellow\">URL : $f_url</font><br>";
 	
 	if (!check_extension($parse[$path], $correct_extensions))
 		return 0;
@@ -181,7 +181,7 @@ function LinkProceed ($f_url)
 			{
 				if (strpos($local_email,'@') !== false && !(in_array($local_email, $email_array))) 
 				{
-					echo "<br><font style=\"background-color: Green\">Find email: $local_email</font><br>";
+					//echo "<br><font style=\"background-color: Green\">Find email: $local_email</font><br>";
 					array_push($email_array, $local_email);
 					array_push($email_link, $f_url);
 				}
@@ -199,7 +199,7 @@ function LinkProceed ($f_url)
 				if (!check_extension($local_parse[path], $correct_extensions))
 					continue;
 				array_push($internal_links, $local_link);
-				echo "<br><font color=\"Blue\">Internal link added. </font><br>Full url: $local_link <br>";
+				//echo "<br><font color=\"Blue\">Internal link added. </font><br>Full url: $local_link <br>";
 			}
 			else
 			{
@@ -215,7 +215,7 @@ function LinkProceed ($f_url)
 				if (!check_extension($local_parse[path], $correct_extensions))
 					continue;
 				array_push($external_links, $local_link);
-				echo "<br><font color=\"Red\">External link added. </font><br>Full url: $local_link<br>";
+				//echo "<br><font color=\"Red\">External link added. </font><br>Full url: $local_link<br>";
 			}
 		}
 	}	
@@ -269,8 +269,8 @@ $internal_links_limit = 150;
 $time_limit = 15;
 $log_path = "/var/www/html/linktraveler/database/log.txt";
 
-$myFile ="http://linktraveler.ru/linktraveler/database/new/newLinks_2015-06-10_16-15-50.txt";
-//$myFile = $argv[1];
+//$myFile ="http://linktraveler.ru/linktraveler/database/new/newLinks_2015-06-10_16-15-50.txt";
+$myFile = $argv[1];
 $f = fopen($myFile, "r");
 while(!feof($f)) 
 { 
@@ -319,7 +319,7 @@ foreach ($links as $url)						// External links cicle
 	$internal_links = array();
 	$average_time = 0;
 	
-	echo "EXTERNAL ";
+	//echo "EXTERNAL ";
 	LinkProceed($url);
 	
 	$new_used_links[] = $used_link;
@@ -330,21 +330,21 @@ foreach ($links as $url)						// External links cicle
 	while (!$check && $internal_links_index < $internal_links_limit && $average_time < $time_limit)
 	{
 		$start_internal = microtime(true);
-		echo "<br>".($internal_links_index+1).") INTERNAL ";
+		//echo "<br>".($internal_links_index+1).") INTERNAL ";
 		LinkProceed($internal_links[$internal_links_index]);
 		$internal_links_index++;
 		$internal_links_count = count($internal_links);
 		$internal_links_remain = $internal_links_count-$internal_links_index;
-		echo "<br> Internal links remain: $internal_links_remain<br>";
+		//echo "<br> Internal links remain: $internal_links_remain<br>";
 		if ($internal_links_index >= count($internal_links))
 		{
 			$check = true;
 		}
 		$time = microtime(true) - $start_internal;
-		printf('Link was in process for %.4F sec.<br>', $time);
+		//printf('Link was in process for %.4F sec.<br>', $time);
 		$time = microtime(true) - $start_link;
 		$average_time = ($time / $internal_links_index);
-		printf('Average time:  %.4F sec.<br>', $average_time);
+		//printf('Average time:  %.4F sec.<br>', $average_time);
 	}
 	$external_links_index++;
 	$date_log = date("Y-m-d_H-i-s");
@@ -356,7 +356,7 @@ $date_log = date("Y-m-d_H-i-s");
 $line = "$date_log: links in post-processing";
 file_put_contents($log_path, PHP_EOL.$line, FILE_APPEND);
 $email_count = count($email_array);
-echo "<br>Emails: ".$email_count."<br>";
+//echo "<br>Emails: ".$email_count."<br>";
 if ($email_count > 0)
 {
 	
@@ -370,7 +370,7 @@ if ($email_count > 0)
 	}
 }
 
-echo "<br>External links: ".count($external_links)."<br>";
+//echo "<br>External links: ".count($external_links)."<br>";
 echo '<form method="POST">
 	<table width="100%" cellspacing="0" cellpadding="4" border="1">
 	<tr>
@@ -389,7 +389,7 @@ foreach ($external_links as $link)
 	echo '<tr>';
 	if(check_url_for_errors($link))
 	{
-		echo '<td>'.$id_count.'</td><td style="background-color: Red">false</td><td><a href="'.$link.'">'.$link.'.</a></td><td>null</td><td>null</td><td>null</td><td></td>';
+		//echo '<td>'.$id_count.'</td><td style="background-color: Red">false</td><td><a href="'.$link.'">'.$link.'.</a></td><td>null</td><td>null</td><td>null</td><td></td>';
 	//	echo "<a href='$link'>$link</a> is <font color=\"Red\">not valid</font><br>";
 	}
 	else
