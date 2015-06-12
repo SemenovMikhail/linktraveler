@@ -109,7 +109,7 @@ function find_all_elements($html, $needle, $tag)
 	}
 	else
 	{
-		echo "<br>Nothing find<br>";
+		//echo "<br>Nothing find<br>";
 		return array();
 	}
 }
@@ -128,7 +128,7 @@ function find_inner_text($html, $tag)
 	}
 	else
 	{
-		echo "<br>Nothing find<br>";
+		//echo "<br>Nothing find<br>";
 		return array();
 	}
 }
@@ -221,32 +221,6 @@ function LinkProceed ($f_url)
 	}	
 }
 
-
-if( isset( $_POST['buf_submit'] ) )
-{
-	$array = $_POST['buf_link'];
-
-	date_default_timezone_set('Europe/Moscow');
-	$date = date("Y-m-d_H-i-s");
-	$newLinks_file = "/var/www/html/linktraveler/database/new/newLinks_".$date.".txt";
-		$fp = fopen($newLinks_file, "w");
-		fclose($fp);
-	if(empty($array))
-	{
-		echo("Nothing is choosed");
-	}
-	else
-	{
-		foreach($array as $chosen_link)
-		{
-				file_put_contents($newLinks_file, PHP_EOL.$chosen_link, FILE_APPEND);
-		}
-		echo "<br>File is ready";
-	}
-	return 0;
-}
-
-
 ob_start();
 error_reporting(E_ALL ^ E_NOTICE);	
 set_time_limit(0);	// 
@@ -295,8 +269,8 @@ while(!feof($f))
 }
 fclose($f);
 
-$result = "/var/www/html/linktraveler/database/result/result_".$date.".html";
-$result_url = "http://linktraveler.ru/linktraveler/database/result/result_".$date.".html";
+$result = "/var/www/html/linktraveler/database/result/result_".$date.".php";
+$result_url = "http://linktraveler.ru/linktraveler/database/result/result_".$date.".php";
 $fp = fopen($result, "w");
 fclose($fp);
 
@@ -371,6 +345,29 @@ if ($email_count > 0)
 }
 
 //echo "<br>External links: ".count($external_links)."<br>";
+echo "if( isset( $_POST['buf_submit'] ) )
+{
+	$array = $_POST['buf_link'];
+
+	date_default_timezone_set('Europe/Moscow');
+	$date = date('Y-m-d_H-i-s');
+	$newLinks_file = '/var/www/html/linktraveler/database/new/newLinks_'.$date.'.txt';
+		$fp = fopen($newLinks_file, 'w');
+		fclose($fp);
+	if(empty($array))
+	{
+		echo('Nothing is choosed');
+	}
+	else
+	{
+		foreach($array as $chosen_link)
+		{
+				file_put_contents($newLinks_file, PHP_EOL.$chosen_link, FILE_APPEND);
+		}
+		echo '<br>File is ready';
+	}
+	return 0;
+}";
 echo '<form method="POST">
 	<table width="100%" cellspacing="0" cellpadding="4" border="1">
 	<tr>
