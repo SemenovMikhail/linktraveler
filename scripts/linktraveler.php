@@ -269,8 +269,8 @@ while(!feof($f))
 }
 fclose($f);
 
-$result = "/var/www/html/linktraveler/database/result/result_".$date.".php";
-$result_url = "http://linktraveler.ru/linktraveler/database/result/result_".$date.".php";
+$result = "/var/www/html/linktraveler/database/result/result_".$date.".html";
+$result_url = "http://linktraveler.ru/linktraveler/database/result/result_".$date.".html";
 $fp = fopen($result, "w");
 fclose($fp);
 
