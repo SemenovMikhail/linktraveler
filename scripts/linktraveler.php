@@ -365,7 +365,6 @@ foreach ($external_links as $link)
 	if(check_url_for_errors($link))
 	{
 		//echo '<td>'.$id_count.'</td><td style="background-color: Red">false</td><td><a href="'.$link.'">'.$link.'.</a></td><td>null</td><td>null</td><td>null</td><td></td>';
-	//	echo "<a href='$link'>$link</a> is <font color=\"Red\">not valid</font><br>";
 	}
 	else
 	{
@@ -389,10 +388,8 @@ foreach ($external_links as $link)
 
 		if ($in_database_check !== false)
 			echo '<td style="background-color: Red">in database</td><td>null</td><td><input name="buf_link[]" type="checkbox" value="'.$ex_link.'"/></td>';
-			//echo "<a href='$link'>$link</a> is in <font style=\"background-color: Red\">database</font><br>";
 		else
 		{
-			//file_put_contents($newLinks_file, PHP_EOL.$link, FILE_APPEND);
 			$country = null;
 			foreach($ipcountry_array as $struct) 
 			{
@@ -411,7 +408,6 @@ foreach ($external_links as $link)
 				$ipcountry_array[] = $new_ipcountry;
 			}
 			echo '<td style="background-color: Green">valid</td><td>'.$country.'</td><td><input name="buf_link[]" type="checkbox" value="'.$ex_link.'"/></td>';
-			//echo "<a href='$link'>$link</a> is <font style=\"background-color: Green\">valid</font> country: $country<br>";
 		}				
 	}
 	echo '</tr>';
