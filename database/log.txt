@@ -926,3 +926,25 @@ Script finished at: 2015-05-15_12-50-02
 2015-06-19_16-18-33 : 11 / 11 links was proceed
 2015-06-19_16-18-33: links in post-processing
 2015-06-19_16-30-42 : Script finished. Result url: http://linktraveler.ru/linktraveler/database/result/result_2015-06-19_16-04-48.html
+
+2015-06-19_16-47-30: script started. Input links url: http://linktraveler.ru/linktraveler/database/new/newLinks_2015-06-19_16-46-24.txt
+2015-06-19_16-50-12 : 1 / 18 links was proceed
+2015-06-19_16-50-50 : 2 / 18 links was proceed
+2015-06-19_16-51-56 : 3 / 18 links was proceed
+2015-06-19_16-56-42 : 4 / 18 links was proceed
+2015-06-19_17-01-42 : 5 / 18 links was proceed
+2015-06-19_17-06-37 : 6 / 18 links was proceed
+2015-06-19_17-06-39 : 7 / 18 links was proceed
+2015-06-19_17-11-24 : 8 / 18 links was proceed
+2015-06-19_17-13-44 : 9 / 18 links was proceed
+2015-06-19_17-13-55 : 10 / 18 links was proceed
+2015-06-19_17-14-02 : 11 / 18 links was proceed
+2015-06-19_17-14-09 : 12 / 18 links was proceed
+2015-06-19_17-15-35 : 13 / 18 links was proceed
+2015-06-19_17-15-40 : 14 / 18 links was proceed
+2015-06-19_17-15-54 : 15 / 18 links was proceed
+2015-06-19_17-16-33 : 16 / 18 links was proceed
+2015-06-19_17-17-01 : 17 / 18 links was proceed
+2015-06-19_17-17-54 : 18 / 18 links was proceed
+2015-06-19_17-17-54: links in post-processing
+2015-06-19_20-46-40 : Script finished. Result url: http://linktraveler.ru/linktraveler/database/result/result_2015-06-19_16-47-30.html
